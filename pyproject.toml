@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-courtroom"
+version = "0.1.0"
+description = "Adversarial multi-agent judicial governance framework and skill for software architecture, code verification, and data pipelines"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Courtroom Contributors" }
+]
+keywords = ["ai-agents", "mcp", "llm-evaluation", "software-architecture", "adversarial-review"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "pydantic>=2.0",
+  "pyyaml>=6.0",
+  "rich>=13.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/krishnanvignesh/agent-courtroom"
+Repository = "https://github.com/krishnanvignesh/agent-courtroom"
+Issues = "https://github.com/krishnanvignesh/agent-courtroom/issues"
+Changelog = "https://github.com/krishnanvignesh/agent-courtroom/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+bedrock = ["boto3>=1.34"]
+anthropic = ["anthropic>=0.34"]
+openai = ["openai>=1.40"]
+
+[project.scripts]
+courtroom = "courtroom.cli:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0",
+]
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/courtroom"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

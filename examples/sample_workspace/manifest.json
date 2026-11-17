@@ -1,0 +1,24 @@
+{
+  "seed": 42,
+  "sample_size": 2,
+  "documents": [
+    {
+      "doc_id": "DOC-001",
+      "title": "Permit #A-100 Disposition",
+      "stratum": "permits",
+      "source_path": "docs/DOC-001.html",
+      "oracle_hint": {
+        "status": "GRANTED"
+      }
+    },
+    {
+      "doc_id": "DOC-002",
+      "title": "Application #B-202 Disposition",
+      "stratum": "permits",
+      "source_path": "docs/DOC-002.html",
+      "oracle_hint": {
+        "status": "REVOKED"
+      }
+    }
+  ]
+}

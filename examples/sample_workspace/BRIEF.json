@@ -1,0 +1,19 @@
+{
+  "round_id": "round-1",
+  "groups": [
+    {
+      "group_id": "G1",
+      "title": "Explicit REVOKED notices fall back to PENDING",
+      "root_cause": "law/rulebook.json (R-REVOKE-PROPOSAL currently disabled)",
+      "loss_ids": [
+        "DOC-002"
+      ],
+      "position": "fix_rule",
+      "facts": [
+        "DOC-002 source text verbatim: 'Application #B-202 is REVOKED due to expired bond.'",
+        "R-REVOKE-PROPOSAL exists in rulebook.json as disabled proposal."
+      ],
+      "proposed_change": "Submit PLAN-002 to enable R-REVOKE-PROPOSAL in derive stage."
+    }
+  ]
+}

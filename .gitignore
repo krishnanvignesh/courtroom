@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+.courtroom_data/
+ledger.json
+cache/
+round-*/
+ours-*.json

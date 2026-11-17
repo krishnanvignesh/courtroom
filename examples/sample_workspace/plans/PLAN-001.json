@@ -1,0 +1,39 @@
+{
+  "plan_id": "PLAN-001",
+  "mode": "pipeline",
+  "goal": "Enable explicit R-GRANT derivation for regulatory grant notices under PREC-001.",
+  "blast_radius": {
+    "allowed_files": [
+      "law/rulebook.json"
+    ],
+    "forbidden_files": [
+      "law/owner_decisions.md"
+    ],
+    "expected_deltas": {
+      "DOC-001.status": "GRANTED"
+    }
+  },
+  "items": [
+    {
+      "id": "ITEM-1",
+      "title": "Enable R-GRANT derive rule",
+      "change": "Activate R-GRANT in law/rulebook.json and bump rulebook version to 0.2.0.",
+      "rationale": "Explicit GRANTED dispositions override generic notice PENDING defaults under PREC-001.",
+      "evidence_ids": [
+        "E1"
+      ],
+      "risks": [
+        "Potential false positives if GRANTED appears in negated text"
+      ],
+      "verification": "Replay gate verifies only DOC-001.status transitions from PENDING to GRANTED."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "source": "docs/DOC-001.html",
+      "finding": "Notice explicitly grants Permit #A-100.",
+      "quote": "Permit #A-100 is GRANTED for Offshore Block 4"
+    }
+  ]
+}

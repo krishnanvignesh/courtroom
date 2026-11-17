@@ -1,0 +1,8 @@
+{
+  "PROJECT": "SoftwareService",
+  "SYSTEM_UNDER_TEST": "application code, API contracts, database migrations, and test suites",
+  "PROD_MODEL": "Claude Sonnet 4.6",
+  "COURT_MODEL": "us.anthropic.claude-opus-5-5",
+  "PATH": ".ai-instructions/skills/courtroom",
+  "COURT_CODE_DIR": "tools/courtroom"
+}

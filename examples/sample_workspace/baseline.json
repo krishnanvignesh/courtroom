@@ -1,0 +1,20 @@
+{
+  "DOC-001": {
+    "status": "PENDING",
+    "_meta": {
+      "route": "publish",
+      "stages": ["scope", "fill", "validation", "derive", "route"],
+      "applied_rules": ["R-NOTICE-DEFAULT"],
+      "warnings": []
+    }
+  },
+  "DOC-002": {
+    "status": "PENDING",
+    "_meta": {
+      "route": "publish",
+      "stages": ["scope", "fill", "validation", "derive", "route"],
+      "applied_rules": ["R-NOTICE-DEFAULT"],
+      "warnings": []
+    }
+  }
+}

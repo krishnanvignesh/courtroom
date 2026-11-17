@@ -1,0 +1,11 @@
+{
+  "precedents": [
+    {
+      "id": "PREC-001",
+      "delegation_ref": "OD-1",
+      "citation": "decided by the court under OD-1",
+      "holding": "Explicit GRANTED dispositions override generic notice defaults.",
+      "scope": "permit_status"
+    }
+  ]
+}

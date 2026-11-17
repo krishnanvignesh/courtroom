@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "changelog": [
+    "0.1.0: Initial notice default rule",
+    "0.2.0: Enabled R-GRANT explicit permit grant extraction"
+  ],
+  "rules": [
+    {
+      "id": "R-NOTICE-DEFAULT",
+      "owner": "pipeline-team",
+      "status": "active",
+      "enabled": true,
+      "stage": "fill",
+      "description": "Fallback pending status for regulatory notices.",
+      "params": {
+        "field": "status",
+        "when_contains": "Notice",
+        "value": "PENDING"
+      }
+    },
+    {
+      "id": "R-GRANT",
+      "owner": "pipeline-team",
+      "status": "active",
+      "enabled": true,
+      "stage": "derive",
+      "description": "Derive GRANTED when source explicitly states GRANTED (PREC-001).",
+      "params": {
+        "field": "status",
+        "when_contains": "GRANTED",
+        "value": "GRANTED"
+      }
+    },
+    {
+      "id": "R-REVOKE-PROPOSAL",
+      "owner": "pipeline-team",
+      "status": "proposed",
+      "enabled": false,
+      "stage": "derive",
+      "description": "Proposed rule to map REVOKED notices (disabled pending Plan Hearing).",
+      "params": {
+        "field": "status",
+        "when_contains": "REVOKED",
+        "value": "REVOKED"
+      }
+    }
+  ]
+}

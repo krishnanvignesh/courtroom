@@ -1,0 +1,23 @@
+{
+  "plan_id": "PLAN-001",
+  "responses": [
+    {
+      "objection_id": "OBJ-1",
+      "item_id": "ITEM-1",
+      "stance": "defend",
+      "argument": "Blast radius is isolated to law/rulebook.json and replay gate verifies exact DOC-001 delta.",
+      "evidence_ids": [
+        "E1"
+      ]
+    },
+    {
+      "objection_id": "OBJ-2",
+      "item_id": "ITEM-1",
+      "stance": "defend",
+      "argument": "Uses existing rulebook derive hook directly with zero new abstractions.",
+      "evidence_ids": [
+        "E1"
+      ]
+    }
+  ]
+}

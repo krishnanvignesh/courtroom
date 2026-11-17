@@ -1,0 +1,8 @@
+{
+  "PROJECT": "BOE",
+  "SYSTEM_UNDER_TEST": "BOE regulatory extraction rules, prompts, pipeline code, and tests",
+  "PROD_MODEL": "Haiku 4.5",
+  "COURT_MODEL": "Opus 5.5 (us.anthropic.claude-opus-5-5) on Bedrock woodmac-ai",
+  "PATH": ".ai-instructions/skills/boe-courtroom",
+  "COURT_CODE_DIR": "scrapers/boe/tools/v2/courtroom"
+}

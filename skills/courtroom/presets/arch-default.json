@@ -1,0 +1,8 @@
+{
+  "PROJECT": "ArchitectureGovernance",
+  "SYSTEM_UNDER_TEST": "system architecture RFCs, service boundaries, data models, and security invariants",
+  "PROD_MODEL": "Claude Sonnet 4.6",
+  "COURT_MODEL": "us.anthropic.claude-opus-5-5",
+  "PATH": ".ai-instructions/skills/arch-courtroom",
+  "COURT_CODE_DIR": "tools/courtroom"
+}
