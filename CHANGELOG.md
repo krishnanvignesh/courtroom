@@ -5,6 +5,16 @@ All notable changes to `agent-courtroom` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **Docs**: Rewrote `README.md` as a short, setup-first overview. Moved the in-depth material (architecture, roles, law, Bailiff, blinding, cost controls, CLI/MCP reference, walkthrough) to `docs/HOW_IT_WORKS.md`.
+
+### Added
+
+- **Website (`site/`)**: GitHub Pages site with an overview, the 4-step lifecycle, an architecture diagram, and software / web / architecture / pipeline examples. Deployed by `.github/workflows/pages.yml`.
+
 ## [0.1.0] - 2026-11-17
 
 ### Added

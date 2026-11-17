@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COURTROOM: Put Your AI Agent on Trial</title>
+  <meta name="description" content="Stop letting your AI coding agent grade its own homework. Courtroom puts every plan through a Prosecutor, a Public Defender, a code-based fact checker, and a blinded Judge.">
+  <meta property="og:title" content="COURTROOM: Put Your AI Agent on Trial">
+  <meta property="og:description" content="Prosecutor vs Public Defender, Python-verified evidence, a $0 blast-radius gate, and a blinded Judge. Works with Claude Code, Antigravity, Cursor and any MCP agent.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="crt" aria-hidden="true"></div>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar" id="nav">
+  <div class="wrap topbar-inner">
+    <a href="#" class="logo"><span class="sprite sprite-sm" data-sprite="gavel"></span>COURTROOM</a>
+    <nav class="menu">
+      <a href="#bosses">Bosses</a>
+      <a href="#select">Characters</a>
+      <a href="#map">Stages</a>
+      <a href="#engine">Engine</a>
+      <a href="#cases">Case Files</a>
+      <a href="#start" class="menu-start">▶ Start</a>
+    </nav>
+    <a class="pbtn pbtn-sm pbtn-dark" href="https://github.com/krishnanvignesh/courtroom" target="_blank" rel="noopener">★ GitHub</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ TITLE SCREEN ============ -->
+<section class="title-screen">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="wrap title-grid">
+    <div class="title-copy">
+      <p class="kicker">A governance game for AI coding agents</p>
+      <h1 class="game-title">
+        <span class="t1">COURT</span><span class="t2">ROOM</span>
+      </h1>
+      <p class="tagline">Stop letting your agent<br><mark>grade its own homework.</mark></p>
+      <p class="blurb">
+        If you're building anything complex, one optimistic AI loop isn't enough. Every plan faces a
+        <b class="c-red">Prosecutor</b> and a <b class="c-blue">Public Defender</b>, every claim is checked by a
+        <b class="c-green">Bailiff written in plain Python</b>, and a <b class="c-purple">blinded Judge</b> makes the final call.
+      </p>
+      <div class="cta-row">
+        <a href="#start" class="pbtn pbtn-yellow">▶ PRESS START</a>
+        <a href="#cases" class="pbtn pbtn-dark">VIEW CASE FILES</a>
+      </div>
+      <p class="insert-coin">INSERT COIN · FREE PLAY ($0.00 OFFLINE MODE)</p>
+    </div>
+
+    <!-- Game screen -->
+    <div class="cabinet">
+      <div class="cabinet-top">
+        <span>P1 AGENT</span><span class="blink">● LIVE TRIAL</span><span>CASE 014</span>
+      </div>
+      <div class="screen" id="gameScreen">
+        <div class="hud">
+          <div class="hp"><span>PLAN</span><div class="bar"><i id="hpBar" style="width:100%"></i></div></div>
+          <div class="cost">COST <b id="costVal">$0.00</b></div>
+        </div>
+        <div class="bench">
+          <div class="actor actor-judge" data-actor="judge"><span class="sprite sprite-lg" data-sprite="judge"></span><em>JUDGE</em></div>
+        </div>
+        <div class="floor">
+          <div class="actor" data-actor="prosecutor"><span class="sprite sprite-lg" data-sprite="prosecutor"></span><em>PROSECUTOR</em></div>
+          <div class="actor" data-actor="bailiff"><span class="sprite sprite-lg" data-sprite="bailiff"></span><em>BAILIFF</em></div>
+          <div class="actor flip" data-actor="defender"><span class="sprite sprite-lg" data-sprite="defender"></span><em>DEFENDER</em></div>
+        </div>
+        <div class="objection" id="objection">OBJECTION!</div>
+        <div class="dialog">
+          <div class="dialog-name" id="dlgName">COURT</div>
+          <p class="dialog-text" id="dlgText"></p>
+          <span class="dialog-next">▼</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap hiscore">
+    <div class="score"><span>GATE COST</span><b class="c-green">$0.00</b></div>
+    <div class="score"><span>CITATIONS CHECKED</span><b class="c-blue">100%</b></div>
+    <div class="score"><span>SAMPLE ROUND</span><b class="c-yellow">$0.06</b></div>
+    <div class="score"><span>GAME MODES</span><b class="c-purple">3</b></div>
+    <div class="score"><span>MCP TOOLS</span><b class="c-red">7</b></div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>★ WORKS WITH CLAUDE CODE</span><span>★ ANTIGRAVITY</span><span>★ CURSOR</span><span>★ CODEX</span><span>★ WINDSURF</span><span>★ CLINE</span><span>★ ANY MCP CLIENT</span><span>★ RUNS OFFLINE AT $0.00</span>
+    <span>★ WORKS WITH CLAUDE CODE</span><span>★ ANTIGRAVITY</span><span>★ CURSOR</span><span>★ CODEX</span><span>★ WINDSURF</span><span>★ CLINE</span><span>★ ANY MCP CLIENT</span><span>★ RUNS OFFLINE AT $0.00</span>
+  </div>
+</div>
+
+<!-- ============ BOSSES (PROBLEM) ============ -->
+<section class="sec" id="bosses">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="world">WORLD 1</p>
+      <h2>The Boss Roster</h2>
+      <p>On small tasks your agent wins easily. On complex projects, these six bosses show up every time.</p>
+    </header>
+
+    <div class="boss-grid">
+      <article class="boss">
+        <div class="boss-top"><span class="boss-lv">LV 99</span><span class="boss-name">The Self-Certifier</span></div>
+        <div class="hpbar"><i style="width:92%"></i></div>
+        <p>"All tests pass!" The tests were written to match the code, not the spec.</p>
+        <div class="weak"><span>WEAKNESS</span>Independent tests written from the plan alone</div>
+      </article>
+      <article class="boss">
+        <div class="boss-top"><span class="boss-lv">LV 80</span><span class="boss-name">The Hallucinator</span></div>
+        <div class="hpbar"><i style="width:78%"></i></div>
+        <p>"<code>auth.py</code> already handles this." It doesn't. The function it quoted doesn't exist.</p>
+        <div class="weak"><span>WEAKNESS</span>The Bailiff checks every quote &amp; symbol in Python</div>
+      </article>
+      <article class="boss">
+        <div class="boss-top"><span class="boss-lv">LV 85</span><span class="boss-name">The Blast Radius</span></div>
+        <div class="hpbar"><i style="width:85%"></i></div>
+        <p>You asked for an API fix. Five other files changed, including billing.</p>
+        <div class="weak"><span>WEAKNESS</span>A $0 gate fails any file outside the plan</div>
+      </article>
+      <article class="boss">
+        <div class="boss-top"><span class="boss-lv">LV 70</span><span class="boss-name">The Amnesiac</span></div>
+        <div class="hpbar"><i style="width:66%"></i></div>
+        <p>Last Tuesday's decision disappears with the context window, and the agent quietly reverses it.</p>
+        <div class="weak"><span>WEAKNESS</span>Append-only Living Law in your repo</div>
+      </article>
+      <article class="boss">
+        <div class="boss-top"><span class="boss-lv">LV 75</span><span class="boss-name">The Architect</span></div>
+        <div class="hpbar"><i style="width:72%"></i></div>
+        <p>An interface, a factory, and three backends for a problem you have once.</p>
+        <div class="weak"><span>WEAKNESS</span>The Public Defender argues for YAGNI</div>
+      </article>
+      <article class="boss">
+        <div class="boss-top"><span class="boss-lv">LV 60</span><span class="boss-name">The Money Pit</span></div>
+        <div class="hpbar"><i style="width:58%"></i></div>
+        <p>Retries, re-reviews, and re-runs with no ceiling. The bill arrives at the end of the month.</p>
+        <div class="weak"><span>WEAKNESS</span>Disk cache, ledger &amp; a hard USD cap</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHARACTER SELECT ============ -->
+<section class="sec sec-band" id="select">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="world">WORLD 2</p>
+      <h2>Character Select</h2>
+      <p>A persona prompt changes the tone. Opposing roles change the result. The roles that argue, check facts, and decide are kept separate.</p>
+    </header>
+
+    <div class="char-grid">
+      <article class="char" style="--c: var(--red)">
+        <div class="char-portrait"><span class="sprite sprite-xl" data-sprite="prosecutor"></span></div>
+        <h3>PROSECUTOR</h3>
+        <p class="char-class">Class: LLM · Attacker</p>
+        <dl class="stats">
+          <dt>RISK</dt><dd><i style="--v:95%"></i></dd>
+          <dt>SECURITY</dt><dd><i style="--v:90%"></i></dd>
+          <dt>MERCY</dt><dd><i style="--v:10%"></i></dd>
+        </dl>
+        <p class="char-desc">Looks for failure modes, race conditions, security holes, and side effects nobody predicted.</p>
+      </article>
+      <article class="char" style="--c: var(--blue)">
+        <div class="char-portrait"><span class="sprite sprite-xl" data-sprite="defender"></span></div>
+        <h3>DEFENDER</h3>
+        <p class="char-class">Class: LLM · YAGNI Counsel</p>
+        <dl class="stats">
+          <dt>SIMPLICITY</dt><dd><i style="--v:95%"></i></dd>
+          <dt>SCOPE CTRL</dt><dd><i style="--v:85%"></i></dd>
+          <dt>ABSTRACTION</dt><dd><i style="--v:5%"></i></dd>
+        </dl>
+        <p class="char-desc">Pushes back on speculative abstractions, extra dependencies, and scope creep.</p>
+      </article>
+      <article class="char" style="--c: var(--green)">
+        <div class="char-portrait"><span class="sprite sprite-xl" data-sprite="bailiff"></span></div>
+        <h3>BAILIFF</h3>
+        <p class="char-class">Class: Pure Python · No AI</p>
+        <dl class="stats">
+          <dt>ACCURACY</dt><dd><i style="--v:100%"></i></dd>
+          <dt>TRUST LLM</dt><dd><i style="--v:0%"></i></dd>
+          <dt>COST</dt><dd><i style="--v:0%"></i></dd>
+        </dl>
+        <p class="char-desc">Checks every quote, AST symbol, line range, and command hash. A claim that can't be verified doesn't count.</p>
+      </article>
+      <article class="char" style="--c: var(--purple)">
+        <div class="char-portrait"><span class="sprite sprite-xl" data-sprite="judge"></span></div>
+        <h3>JUDGE</h3>
+        <p class="char-class">Class: LLM · Blindfolded</p>
+        <dl class="stats">
+          <dt>FAIRNESS</dt><dd><i style="--v:95%"></i></dd>
+          <dt>EVIDENCE</dt><dd><i style="--v:100%"></i></dd>
+          <dt>BIAS</dt><dd><i style="--v:3%"></i></dd>
+        </dl>
+        <p class="char-desc">Sees only "Submission A" and "Submission B", never "ours". Rules on verified evidence and active law.</p>
+      </article>
+      <article class="char" style="--c: var(--yellow)">
+        <div class="char-portrait"><span class="sprite sprite-xl" data-sprite="scroll"></span></div>
+        <h3>LIVING LAW</h3>
+        <p class="char-class">Item: Save File</p>
+        <dl class="stats">
+          <dt>MEMORY</dt><dd><i style="--v:100%"></i></dd>
+          <dt>EDITABLE</dt><dd><i style="--v:0%"></i></dd>
+          <dt>PERSIST</dt><dd><i style="--v:100%"></i></dd>
+        </dl>
+        <p class="char-desc">Owner decisions → case law → enabled rules → conventions. Append-only, so history can't be rewritten.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE MAP ============ -->
+<section class="sec" id="map">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="world">WORLD 3</p>
+      <h2>Stage Map</h2>
+      <p>Every meaningful change plays the same four stages. The free, deterministic checks always run before anything that costs money.</p>
+    </header>
+
+    <div class="stage-map">
+      <svg class="path" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M60 60 C 200 0, 300 120, 380 60 S 560 0, 620 60 S 820 120, 940 60" />
+      </svg>
+      <div class="stage" style="--c: var(--yellow)">
+        <div class="stage-node">1</div>
+        <div class="stage-card">
+          <p class="stage-id">STAGE 1-1</p>
+          <h3>Plan Hearing</h3>
+          <p>The agent writes a plan listing its evidence and the files it may touch. The Prosecutor and Defender each object, the agent responds, and the Judge rules.</p>
+          <p class="loot">🔒 No code until approved</p>
+        </div>
+      </div>
+      <div class="stage" style="--c: var(--blue)">
+        <div class="stage-node">2</div>
+        <div class="stage-card">
+          <p class="stage-id">STAGE 1-2</p>
+          <h3>Build</h3>
+          <p>Only the approved plan gets built. Rule changes bump the rulebook version, and every test names the rule it enforces.</p>
+          <p class="loot">📜 Scoped by contract</p>
+        </div>
+      </div>
+      <div class="stage" style="--c: var(--green)">
+        <div class="stage-node">3</div>
+        <div class="stage-card">
+          <p class="stage-id">STAGE 1-3 · BOSS</p>
+          <h3>Gate + Blind Trial</h3>
+          <p>A $0 diff gate fails any surprise change. Then an independent Party B competes with the agent's work, and the Bailiff and Judge settle each disagreement.</p>
+          <p class="loot">🪙 $0.00 gate · verified quotes only</p>
+        </div>
+      </div>
+      <div class="stage" style="--c: var(--purple)">
+        <div class="stage-node">4</div>
+        <div class="stage-card">
+          <p class="stage-id">STAGE 1-4</p>
+          <h3>Closing</h3>
+          <p>Every remaining loss is grouped and labelled: fix the rule, fix the code, accept the limit, or escalate to you.</p>
+          <p class="loot">🏁 <code>continue</code> or <code>consensus</code></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rpg-box loop">
+      <b class="c-yellow">TIP:</b> A <code>continue</code> verdict sends you back to Stage 1-1 with a new plan. The run ends on <code>consensus</code>, and then you decide whether to commit.
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENGINE (ARCHITECTURE) ============ -->
+<section class="sec sec-band" id="engine">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="world">WORLD 4</p>
+      <h2>Game Engine</h2>
+      <p>The AI argues, and code decides the facts. Courtroom plugs into your agent through a skill file and an MCP server. LLM calls all go through one client, and fact checking never touches an LLM.</p>
+    </header>
+
+    <div class="engine">
+      <div class="layer">
+        <div class="layer-tag">L1 · PLAYER</div>
+        <div class="blocks">
+          <div class="blk">Claude Code</div><div class="blk">Antigravity</div><div class="blk">Cursor</div><div class="blk">Codex · Windsurf · Cline</div>
+        </div>
+      </div>
+      <div class="pipe" aria-hidden="true"></div>
+      <div class="layer">
+        <div class="layer-tag">L2 · CONTROLLER</div>
+        <div class="blocks">
+          <div class="blk blk-hl"><b>SKILL.md</b><small>rendered from a preset: the rules of the game</small></div>
+          <div class="blk blk-hl"><b>courtroom CLI</b><small>init · plan · trial · closing · report</small></div>
+          <div class="blk blk-hl"><b>courtroom mcp</b><small>stdio JSON-RPC 2.0 · 7 tools</small></div>
+        </div>
+      </div>
+      <div class="pipe" aria-hidden="true"></div>
+      <div class="layer">
+        <div class="layer-tag">L3 · STAGES</div>
+        <div class="blocks">
+          <div class="blk" style="--c:var(--yellow)"><b>Plan Court</b><small>challenge + judge</small></div>
+          <div class="blk" style="--c:var(--green)"><b>Replay Gate</b><small>$0 diff + blast radius</small></div>
+          <div class="blk" style="--c:var(--blue)"><b>Trial Court</b><small>Party A vs Party B</small></div>
+          <div class="blk" style="--c:var(--purple)"><b>Closing</b><small>loss groups</small></div>
+        </div>
+      </div>
+      <div class="pipe" aria-hidden="true"></div>
+      <div class="layer-split">
+        <div class="layer layer-green">
+          <div class="layer-tag">L4a · PHYSICS (NO AI)</div>
+          <div class="blocks">
+            <div class="blk"><b>Bailiff</b><small>quotes · AST · lines · hashes</small></div>
+            <div class="blk"><b>Law</b><small>Parts 0–3, append-only</small></div>
+            <div class="blk"><b>doc_check</b><small>integrity</small></div>
+            <div class="blk"><b>Schemas</b><small>Pydantic</small></div>
+          </div>
+        </div>
+        <div class="layer layer-purple">
+          <div class="layer-tag">L4b · COURTCLIENT (EVERY LLM CALL)</div>
+          <div class="blocks">
+            <div class="blk"><b>Blinding</b><small>ours → Submission A</small></div>
+            <div class="blk"><b>Cache</b><small>SHA-256 · repeats $0</small></div>
+            <div class="blk"><b>Ledger</b><small>every cent logged</small></div>
+            <div class="blk"><b>Budget</b><small>hard stop</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="pipe" aria-hidden="true"></div>
+      <div class="layer-split">
+        <div class="layer">
+          <div class="layer-tag">L5 · PROVIDERS</div>
+          <div class="blocks">
+            <div class="blk" style="--c:var(--green)"><b>mock</b><small>offline · $0 · CI</small></div>
+            <div class="blk">Anthropic</div><div class="blk">OpenAI</div><div class="blk">Bedrock</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">SAVE DATA · YOUR REPO</div>
+          <div class="blocks">
+            <div class="blk mono">law/</div><div class="blk mono">plans/</div><div class="blk mono">tracker.md</div><div class="blk mono">.courtroom_data/</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="inventory">
+      <span class="inv-title">INVENTORY · MCP TOOLS</span>
+      <code>court_verify_evidence</code><code>court_assemble_law</code><code>court_challenge</code><code>court_judge</code><code>court_replay_gate</code><code>court_trial_round</code><code>court_closing</code>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE FILES (EXAMPLES) ============ -->
+<section class="sec" id="cases">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="world">WORLD 5</p>
+      <h2>Case Files</h2>
+      <p>Four cases across three game modes. <b class="c-green">Case 04 is real output</b> from the repo's sample workspace. Cases 01–03 are illustrative scenarios in the same format.</p>
+    </header>
+
+    <div class="cartridges" role="tablist">
+      <button class="cart active" data-tab="software" role="tab"><span>CASE 01</span>Software Dev</button>
+      <button class="cart" data-tab="web" role="tab"><span>CASE 02</span>Web Dev</button>
+      <button class="cart" data-tab="arch" role="tab"><span>CASE 03</span>Architecture</button>
+      <button class="cart" data-tab="pipeline" role="tab"><span>CASE 04 · REAL</span>Data Pipeline</button>
+    </div>
+
+    <!-- CASE 01 -->
+    <div class="case active" data-panel="software">
+      <div class="case-grid">
+        <div class="case-story">
+          <p class="mode">MODE: software · PRESET: software-default</p>
+          <h3>"Add rate limiting to the payments API"</h3>
+          <p class="muted">An ordinary backend task that can easily spread into code nobody asked the agent to touch.</p>
+          <div class="lines">
+            <div class="line"><span class="who r">PROSECUTOR</span><p>Objection! An in-memory counter breaks behind 4 Gunicorn workers. Show me where the state is shared.</p></div>
+            <div class="line"><span class="who b">DEFENDER</span><p>The plan adds a pluggable <code>RateLimiterBackend</code> with 3 implementations. Only Redis is used.</p></div>
+            <div class="line"><span class="who g">BAILIFF</span><p><code>settings.REDIS_URL</code> found at <code>config/settings.py L41</code>. VERIFIED.</p></div>
+            <div class="line"><span class="who p">JUDGE</span><p>Approved with conditions. Drop the interface and call Redis directly.</p></div>
+            <div class="line"><span class="who y">GATE</span><p>During the build the agent also "tidied" <code>src/billing/webhooks.py</code>. <b class="c-red">Blast radius violation. FAIL at $0.00.</b></p></div>
+          </div>
+          <div class="clear"><b>STAGE CLEAR</b> No surprise edit to billing code, and about 120 lines of unneeded abstraction never got written.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">CASE-01 · PLAN-014.LOG</div>
+<pre><span class="d"># plans/PLAN-014.json (excerpt)</span>
+<span class="b">"blast_radius"</span>: {
+  <span class="b">"allowed_files"</span>: [<span class="g">"src/api/middleware/rate_limit.py"</span>,
+                    <span class="g">"src/api/app.py"</span>, <span class="g">"tests/test_rate_limit.py"</span>],
+  <span class="b">"forbidden_files"</span>: [<span class="r">"src/billing/**"</span>, <span class="r">"migrations/**"</span>]
+}
+
+<span class="y">$ courtroom plan challenge --plan plans/PLAN-014.json --law-dir law</span>
+<span class="g">Challenge recorded: 2 objection(s) for PLAN-014.</span>
+  [OBJ-1 · <span class="r">PROSECUTOR</span> · major] Shared state across workers unproven.
+  [OBJ-2 · <span class="b">PUBLIC_DEFENDER</span> · minor] Backend interface is speculative.
+
+<span class="y">$ courtroom plan judge --plan plans/PLAN-014.json --rebuttal ...</span>
+  <span class="g">[VERIFIED]</span> E2 config/settings.py :: settings.REDIS_URL (L41)
+<span class="g">Plan verdict for PLAN-014: overall=approved_with_conditions</span>
+  condition: remove RateLimiterBackend; call Redis directly.
+
+<span class="y">$ courtroom replay-gate --plan plans/PLAN-014.json --changed-files ...</span>
+<span class="r">passed=False</span>  blast_radius_violations=[<span class="r">'src/billing/webhooks.py'</span>]
+<span class="d">cost: $0.00</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 02 -->
+    <div class="case" data-panel="web">
+      <div class="case-grid">
+        <div class="case-story">
+          <p class="mode">MODE: software · BLIND SPEC-TO-TEST TRIAL</p>
+          <h3>"Migrate the checkout form to React Hook Form"</h3>
+          <p class="muted">A frontend refactor where the agent's own tests pass because it wrote them against its own implementation.</p>
+          <div class="lines">
+            <div class="line"><span class="who y">PLAN</span><p>Allowed files: <code>CheckoutForm.tsx</code>, <code>useCheckout.ts</code>, and their tests. <code>src/auth/**</code> and <code>src/payments/api/**</code> are forbidden.</p></div>
+            <div class="line"><span class="who">PARTY A</span><p>Refactor complete. 14/14 tests passing.</p></div>
+            <div class="line"><span class="who">PARTY B</span><p>Wrote tests <b>from the plan only</b>, without seeing the implementation. One fails: <i>"submits with saved card when 'Use saved card' is checked."</i></p></div>
+            <div class="line"><span class="who g">BAILIFF</span><p>Plan quote <i>"Existing saved-card checkout must continue to work"</i>: exact match. VERIFIED.</p></div>
+            <div class="line"><span class="who p">JUDGE</span><p>Submission B wins. <code>savedCardId</code> was dropped from the payload.</p></div>
+          </div>
+          <div class="clear"><b>STAGE CLEAR</b> A checkout regression caught before deploy, by tests the implementation couldn't influence.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">CASE-02 · ROUND-1.LOG</div>
+<pre><span class="y">$ courtroom trial --ours ours-r1.json --law-dir law --out round-1 --budget-usd 3</span>
+<span class="y">=== Trial: checkout.saved_card (round=round-1, mode=software) ===</span>
+  Party A (ours):        14/14 passing
+  Party B (independent): 1 failing spec assertion
+  Disputed: payload.savedCardId
+
+<span class="p">--- Advocate A ---</span>
+  Opening: Submission A preserves all form fields under RHF.
+<span class="p">--- Advocate B ---</span>
+  Opening: Submission A omits savedCardId when the box is checked.
+
+<span class="g">--- Bailiff Fact-Check ---</span>
+  <span class="g">[VERIFIED]</span> PLAN-021: "Existing saved-card checkout must
+             continue to work" (exact match, offset 212)
+  <span class="g">[VERIFIED]</span> src/checkout/useCheckout.ts L58-L71
+
+<span class="p">--- Judge Ruling ---</span>
+  <span class="g">Winner: B</span>
+  Decisive Quote [VERIFIED]: "Existing saved-card checkout
+                              must continue to work"
+  ACCEPTED-but-wrong: False
+<span class="d">round cost: $0.041 / budget $3.00</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 03 -->
+    <div class="case" data-panel="arch">
+      <div class="case-grid">
+        <div class="case-story">
+          <p class="mode">MODE: architecture · PRESET: arch-default</p>
+          <h3>"RFC-007: Event-driven order notifications"</h3>
+          <p class="muted">The agent proposes Kafka, a schema registry, and three new consumer services. Is that justified?</p>
+          <div class="lines">
+            <div class="line"><span class="who b">DEFENDER</span><p>Objection! Exhibit <code>E3</code> shows <b>~1,240 orders per day</b>. Kafka is overkill at that volume. A Postgres outbox plus one worker covers it.</p></div>
+            <div class="line"><span class="who r">PROSECUTOR</span><p>An outbox delivers at least once. Without an idempotency key, consumers will double-send.</p></div>
+            <div class="line"><span class="who g">BAILIFF</span><p>E3 command exhibit: exit 0, sha256 recorded, output <code>1240</code>. VERIFIED.</p></div>
+            <div class="line"><span class="who">AGENT</span><p>Concedes both. Amends to an outbox, one worker, and idempotency keys.</p></div>
+            <div class="line"><span class="who p">JUDGE</span><p>Approved with conditions. Precedent <code>PREC-004</code> saved to <code>CASE_LAW.json</code>.</p></div>
+          </div>
+          <div class="clear"><b>STAGE CLEAR</b> Weeks of infrastructure work avoided, and the next session inherits the precedent instead of proposing Kafka again.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">CASE-03 · RFC-007.LOG</div>
+<pre><span class="y">$ courtroom plan challenge --plan plans/RFC-007.md --law-dir law</span>
+<span class="d">Compiled RFC-007.md → RFC-007.json</span>
+<span class="g">Challenge recorded: 2 objection(s) for RFC-007.</span>
+  [OBJ-1 · <span class="b">PUBLIC_DEFENDER</span> · major] Kafka + registry for
+          ~1.2k events/day is speculative scale. See E3.
+  [OBJ-2 · <span class="r">PROSECUTOR</span> · major] No idempotency strategy
+          for redelivered events.
+
+<span class="g">--- Bailiff ---</span>
+  <span class="g">[VERIFIED]</span> E3 command exhibit  exit=0
+             sha256=9f2c…e41a  "1240"
+
+<span class="y">$ courtroom plan judge --plan plans/RFC-007.md --rebuttal ...</span>
+<span class="g">Plan verdict for RFC-007: overall=approved_with_conditions</span>
+  ITEM-1  Kafka cluster       → <span class="r">reject</span>
+  ITEM-1' Postgres outbox     → <span class="g">approve</span>
+  ITEM-2  idempotency key     → <span class="g">approve</span> (binding)
+
+<span class="y">+ CASE_LAW.json</span>  PREC-004 "Prefer transactional outbox
+  below sustained 100 events/s." (decided under OD-2)</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 04 -->
+    <div class="case" data-panel="pipeline">
+      <div class="case-grid">
+        <div class="case-story">
+          <p class="mode mode-real">MODE: pipeline · REAL OUTPUT FROM examples/sample_workspace</p>
+          <h3>"Enable the GRANTED rule for regulatory notices"</h3>
+          <p class="muted">A pipeline reads notices and outputs a status. The agent enables one rule. Did anything else break?</p>
+          <div class="lines">
+            <div class="line"><span class="who y">PLAN</span><p><code>PLAN-001</code> may only touch <code>law/rulebook.json</code> and predicts one change: <code>DOC-001.status → GRANTED</code>.</p></div>
+            <div class="line"><span class="who y">GATE</span><p><code>PENDING → GRANTED</code> as predicted. No surprise diffs. <b class="c-green">PASS at $0.00.</b></p></div>
+            <div class="line"><span class="who">TRIAL</span><p>DOC-002: the agent outputs <code>PENDING</code>, the independent Party B outputs <code>REVOKED</code>.</p></div>
+            <div class="line"><span class="who g">BAILIFF</span><p>"REVOKED due to expired bond." found at normalized offset 38. VERIFIED.</p></div>
+            <div class="line"><span class="who p">JUDGE</span><p>DOC-002 goes to Party B. Closing: <code>continue</code> → <i>"Submit PLAN-002 to enable R-REVOKE-PROPOSAL."</i></p></div>
+          </div>
+          <div class="clear"><b>STAGE CLEAR</b> Full round for <b>$0.0620</b>. A wrong output was caught and routed into a new plan, and a disabled draft rule stayed out of production.</div>
+        </div>
+        <div class="term">
+          <div class="term-head">CASE-04 · ROUND-1.LOG · REAL</div>
+<pre><span class="y">$ courtroom replay-gate --baseline baseline.json --candidate ours-r1.json \
+    --expect DOC-001.status=GRANTED --plan plans/PLAN-001.json</span>
+<span class="g">passed=True</span>  total_diffs=1  matched=DOC-001.status: PENDING -> GRANTED
+unpredicted_diffs=[]  blast_radius_violations=[]
+
+<span class="y">$ courtroom show-trial --round round-1 --id DOC-002</span>
+<span class="y">=== Trial: DOC-002 (round=round-1, mode=pipeline) ===</span>
+  Party A (ours):        {"status": "PENDING"}
+  Party B (independent): {"status": "REVOKED"}
+
+<span class="g">--- Bailiff Fact-Check ---</span>
+  <span class="g">[VERIFIED]</span> Party A: "Notice 2026-11: Application #B-202
+             is REVOKED" (offset 0)
+  <span class="g">[VERIFIED]</span> Party B: "REVOKED due to expired bond." (offset 38)
+
+<span class="p">--- Judge Ruling ---</span>
+  <span class="g">Winner: B</span>
+  Decisive Quote [VERIFIED]: "REVOKED due to expired bond."
+
+<span class="y">$ courtroom report --round round-1</span>
+  Agreements: 1   Contested: 1   ACCEPTED-but-wrong: <span class="g">0</span>
+  Round Cost: <span class="y">$0.0620</span>   Baseline Check: <span class="g">PASS</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VS ============ -->
+<section class="sec sec-band" id="vs">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="world">WORLD 6</p>
+      <h2>Same Agent. Two Endings.</h2>
+    </header>
+    <div class="versus">
+      <div class="ending over">
+        <h3>GAME OVER</h3>
+        <p class="ending-sub">Without Courtroom</p>
+        <ul>
+          <li>Agent approves its own plan</li>
+          <li>Citations taken on trust</li>
+          <li>Any file can change</li>
+          <li>Decisions lost between sessions</li>
+          <li>Draft rules leak into behavior</li>
+          <li>Reviewer knows which answer is "ours"</li>
+          <li>No spending ceiling</li>
+        </ul>
+      </div>
+      <div class="vs-badge">VS</div>
+      <div class="ending win">
+        <h3>YOU WIN</h3>
+        <p class="ending-sub">With Courtroom</p>
+        <ul>
+          <li>Two opposing advocates + a judge</li>
+          <li>Every citation verified in Python</li>
+          <li>Out-of-plan files fail a $0 gate</li>
+          <li>Append-only law in your repo</li>
+          <li>Only enabled rules count as law</li>
+          <li>Judges see "Submission A / B" only</li>
+          <li>Cached calls + a hard USD cap</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="players">
+      <p class="players-title">RECOMMENDED FOR PLAYERS BUILDING</p>
+      <div class="player-grid">
+        <span>🧩 Multi-service backends</span><span>🛒 Production web apps</span><span>📊 Data &amp; ML pipelines</span>
+        <span>🏦 Regulated domains</span><span>🤖 Long agent sessions</span><span>👥 Teams sharing one agent</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ START ============ -->
+<section class="sec" id="start">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="world">PRESS START</p>
+      <h2>Ready, Player One?</h2>
+      <p>You need Python 3.11+ and <a href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener">uv</a>. No API key needed: mock mode runs fully offline.</p>
+    </header>
+
+    <div class="start-grid">
+      <div class="rpg-box start-step">
+        <p class="step-tag">STEP 1 · INSTALL</p>
+        <div class="code"><button class="copy">COPY</button><pre>git clone https://github.com/krishnanvignesh/courtroom.git
+cd courtroom
+uv sync</pre></div>
+      </div>
+
+      <div class="rpg-box start-step">
+        <p class="step-tag">STEP 2 · CONNECT YOUR AGENT</p>
+        <div class="mini-tabs">
+          <button class="mini-tab active" data-mini="claude">Claude Code</button>
+          <button class="mini-tab" data-mini="agy">Antigravity</button>
+          <button class="mini-tab" data-mini="cursor">Cursor</button>
+          <button class="mini-tab" data-mini="mcp">Any MCP</button>
+        </div>
+        <div class="code mini-panel active" data-mini-panel="claude"><button class="copy">COPY</button><pre>uv run courtroom render-skill --preset software-default \
+  --out your-project/.claude/skills/courtroom/SKILL.md
+claude mcp add courtroom -- uv run --directory /path/to/courtroom courtroom mcp</pre></div>
+        <div class="code mini-panel" data-mini-panel="agy"><button class="copy">COPY</button><pre>uv run courtroom render-skill --preset software-default \
+  --out ~/.gemini/antigravity/skills/courtroom/SKILL.md
+# then add the MCP block (Any MCP tab) to mcp_config.json</pre></div>
+        <div class="code mini-panel" data-mini-panel="cursor"><button class="copy">COPY</button><pre>uv run courtroom render-skill --preset software-default \
+  --out your-project/.cursor/rules/courtroom.mdc
+# then add the MCP block (Any MCP tab) to .cursor/mcp.json</pre></div>
+        <div class="code mini-panel" data-mini-panel="mcp"><button class="copy">COPY</button><pre>{
+  "mcpServers": {
+    "courtroom": {
+      "command": "uv",
+      "args": ["run", "--directory", "/path/to/courtroom",
+               "courtroom", "mcp"]
+    }
+  }
+}</pre></div>
+      </div>
+
+      <div class="rpg-box start-step">
+        <p class="step-tag">STEP 3 · NEW GAME</p>
+        <div class="code"><button class="copy">COPY</button><pre>uv run courtroom init \
+  --dir /path/to/your-project \
+  --preset software-default</pre></div>
+        <p class="muted small">Creates <code>law/</code>, <code>plans/</code>, <code>tracker.md</code> and a ready-to-use <code>SKILL.md</code>. Then ask your agent for a change.</p>
+      </div>
+    </div>
+
+    <div class="modes">
+      <p class="players-title">SELECT GAME MODE</p>
+      <div class="mode-grid">
+        <div class="mode-card"><span class="sel">▶</span><code>software-default</code><p>Backends, APIs, web apps, refactors, migrations</p></div>
+        <div class="mode-card"><span class="sel">▶</span><code>arch-default</code><p>RFCs, design docs, service boundaries, data models</p></div>
+        <div class="mode-card"><span class="sel">▶</span><code>boe-pipeline</code><p>Extraction / classification pipelines vs. a sample set</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec sec-band" id="faq">
+  <div class="wrap narrow">
+    <header class="sec-head">
+      <p class="world">HELP MENU</p>
+      <h2>FAQ</h2>
+    </header>
+    <details class="faq">
+      <summary>Do I need an API key?</summary>
+      <p>Not to try it. Every command defaults to <code>--provider mock</code>, which runs offline at $0.00 (CI uses it too). For real reviews, install an extra (<code>.[anthropic]</code>, <code>.[openai]</code>, <code>.[bedrock]</code>) and pass <code>--provider</code>.</p>
+    </details>
+    <details class="faq">
+      <summary>Isn't this too much process for small changes?</summary>
+      <p>For a typo fix, yes, so skip it. The $0 replay gate is cheap enough to run on every change. Save full hearings and trials for work with real blast radius, or work that has to stay consistent with earlier decisions.</p>
+    </details>
+    <details class="faq">
+      <summary>How is this different from a "senior engineer" persona prompt?</summary>
+      <p>A persona changes the agent's style. Courtroom adds structure: two advocates arguing opposite sides, evidence verified in Python, a deterministic file-scope gate, and append-only case law that persists across sessions. Keep your style preferences in <code>conventions.md</code> and use both.</p>
+    </details>
+    <details class="faq">
+      <summary>Can I write plans in Markdown?</summary>
+      <p>Yes. <code>.md</code> and <code>.yaml</code> plans and rebuttals are compiled to validated JSON automatically.</p>
+    </details>
+    <details class="faq">
+      <summary>What does it cost with real models?</summary>
+      <p>You set the ceiling with <code>--budget-usd</code>. Calls are cached by content hash, logged to a ledger, and blocked before they would exceed the cap. Party B and unchanged trials are reused across rounds. The sample round costs about $0.06.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CONTINUE ============ -->
+<section class="continue">
+  <div class="wrap">
+    <p class="continue-q">CONTINUE?</p>
+    <p class="countdown" id="countdown">9</p>
+    <p class="continue-sub">Building something complex? Put your agent on trial.</p>
+    <div class="cta-row center">
+      <a href="#start" class="pbtn pbtn-yellow">▶ PRESS START</a>
+      <a href="https://github.com/krishnanvignesh/courtroom" class="pbtn pbtn-dark" target="_blank" rel="noopener">★ STAR ON GITHUB</a>
+      <a href="https://github.com/krishnanvignesh/courtroom/blob/main/docs/HOW_IT_WORKS.md" class="pbtn pbtn-dark" target="_blank" rel="noopener">📖 STRATEGY GUIDE</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>⚖️ COURTROOM · MIT LICENSE</span>
+    <span>
+      <a href="https://github.com/krishnanvignesh/courtroom">GitHub</a> ·
+      <a href="https://github.com/krishnanvignesh/courtroom/blob/main/docs/HOW_IT_WORKS.md">Docs</a> ·
+      <a href="https://github.com/krishnanvignesh/courtroom/blob/main/CHANGELOG.md">Changelog</a> ·
+      <a href="https://github.com/krishnanvignesh/courtroom/blob/main/SECURITY.md">Security</a>
+    </span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
