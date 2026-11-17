@@ -31,10 +31,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/krishnanvignesh/agent-courtroom"
-Repository = "https://github.com/krishnanvignesh/agent-courtroom"
-Issues = "https://github.com/krishnanvignesh/agent-courtroom/issues"
-Changelog = "https://github.com/krishnanvignesh/agent-courtroom/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/krishnanvignesh/courtroom"
+Repository = "https://github.com/krishnanvignesh/courtroom"
+Issues = "https://github.com/krishnanvignesh/courtroom/issues"
+Changelog = "https://github.com/krishnanvignesh/courtroom/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 bedrock = ["boto3>=1.34"]

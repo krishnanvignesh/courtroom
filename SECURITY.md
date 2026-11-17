@@ -21,7 +21,7 @@
 If you discover a security vulnerability in `agent-courtroom`:
 
 1. **Do not** open a public GitHub issue with exploit details before triage.
-2. Report the issue privately via [GitHub Security Advisories](https://github.com/krishnanvignesh/agent-courtroom/security/advisories/new) (or contact the maintainer privately through GitHub).
+2. Report the issue privately via [GitHub Security Advisories](https://github.com/krishnanvignesh/courtroom/security/advisories/new) (or contact the maintainer privately through GitHub).
 3. Include steps to reproduce, affected module/function names, and potential impact.
 
 We will acknowledge reports promptly and coordinate a fix and release advisory.

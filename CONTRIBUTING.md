@@ -10,8 +10,8 @@ Thank you for contributing to `agent-courtroom`! We welcome bug reports, documen
 ## Development Setup
 
 ```bash
-git clone https://github.com/krishnanvignesh/agent-courtroom.git
-cd agent-courtroom
+git clone https://github.com/krishnanvignesh/courtroom.git
+cd courtroom
 uv sync --dev
 ```
 

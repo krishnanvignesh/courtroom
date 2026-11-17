@@ -90,7 +90,12 @@ def test_release_files_and_sample_workspace_integrity() -> None:
         repo_root / "SECURITY.md",
         repo_root / "LICENSE",
         repo_root / ".github" / "workflows" / "ci.yml",
+        repo_root / "assets" / "hero-overview.png",
+        repo_root / "assets" / "before-after.png",
+        repo_root / "assets" / "step1-plan-hearing.png",
+        repo_root / "assets" / "step3-bailiff-and-trial.png",
+        repo_root / "assets" / "step4-closing-and-law.png",
     ]
     for path in required_files:
         assert path.is_file(), f"Missing release file: {path}"
-        assert path.read_text(encoding="utf-8").strip(), f"Release file is empty: {path}"
+        assert path.stat().st_size > 0, f"Release file is empty: {path}"
